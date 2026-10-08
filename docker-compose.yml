@@ -1,0 +1,22 @@
+name: mcp-finance
+services:
+
+    mcp_server:
+        build: ./server
+        restart: always
+        ports:
+            - 8001:8001
+
+    mcp_agent:
+        build: ./agent
+        profiles:
+            - agent
+        depends_on:
+            - mcp_server
+        environment:
+            OPENAI_API_KEY: ${OPENAI_API_KEY}
+            OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+            MCP_TRANSPORT: http
+            MCP_SERVER_URL: http://mcp_server:8001/mcp
+        stdin_open: true
+        tty: true

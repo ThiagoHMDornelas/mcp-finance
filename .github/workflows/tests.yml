@@ -1,0 +1,42 @@
+name: Testes
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  testes:
+    name: Testes + Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            server/requirements*.txt
+            agent/requirements*.txt
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r server/requirements.txt -r server/requirements_dev.txt
+          pip install -r agent/requirements.txt -r agent/requirements_dev.txt
+
+      - name: Lint (flake8)
+        run: flake8
+
+      - name: Testes do servidor
+        working-directory: server
+        run: pytest -q
+
+      - name: Testes do agente
+        working-directory: agent
+        run: pytest -q

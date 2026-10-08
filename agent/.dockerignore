@@ -1,0 +1,11 @@
+.venv
+__pycache__
+*.py[cod]
+.git
+.github
+tests
+examples
+requirements_dev.txt
+pytest.ini
+*.log
+.env
