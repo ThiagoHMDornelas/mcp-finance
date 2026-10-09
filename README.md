@@ -11,10 +11,15 @@ Projeto de referência que mostra, de ponta a ponta, como construir um **servido
 
 O projeto reúne as duas partes em um **monorepo** — `server/` e `agent/` — com **testes, CI e Docker**.
 
+![Arquitetura do mcp-finance](docs/img/mcpfin_architecture.png)
+
+*Arquitetura — agente ReAct (LangGraph) consumindo um servidor MCP (FastMCP) que consulta o Yahoo Finance via yfinance.*
+
 ## Sumário
 
 - [Visão geral](#visão-geral)
 - [Arquitetura](#arquitetura)
+- [Demonstração](#demonstração)
 - [Componentes](#componentes)
 - [Tecnologias](#tecnologias)
 - [Estrutura do projeto](#estrutura-do-projeto)
@@ -56,6 +61,12 @@ Servidor MCP (FastMCP)                          [server/]
    ▼
 yfinance (Yahoo Finance)
 ```
+
+## Demonstração
+
+Saída do agente no terminal (modo `stdio`) — o agente descobre a ferramenta no servidor MCP e responde à pergunta:
+
+![Demonstração do agente no terminal](docs/img/mcpfin_terminal.png)
 
 ## Componentes
 
